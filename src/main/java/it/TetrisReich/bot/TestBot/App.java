@@ -2,14 +2,15 @@ package it.TetrisReich.bot.TestBot;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.TelegramBotAdapter;
-import it.TetrisReich.bot.TestBot.*;
+import it.TetrisReich.bot.TestBot.Download;
+import it.TetrisReich.bot.TestBot.Chan;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Random;
+
 
 import org.json.*;
 
@@ -29,6 +30,7 @@ public class App {
 	public static Boolean crash = false;
 	public static String api;
 	public static String videoid;
+	public static Boolean liveFinish = true;
     public static void main(String[] args) throws IOException {
     	//System.out.println(args.length);
     	//Pchat.t.start();
@@ -37,7 +39,7 @@ public class App {
     	TelegramBot bot = TelegramBotAdapter.build(token);
     	if(startup()==false) {logger("Fail to loading file"); return;}
     	bot.sendMessage("@MultychatNews", "bot is again online.");
-    	String id = channel;
+    	//String id = channel;
     	while(true){
     		String info = getInfo();
     		System.out.println(Convinti + "   " + reader("all"));
@@ -46,7 +48,8 @@ public class App {
     			writer(Convinti, "all");
     			writer(info, "id");
     			logger("\nyap\n");
-    			if(inLive==true) Clive.t.start();
+    			//The after-live modifier message is still in alpha. I'm waiting for the bot 2.0 update of the library.
+    			if(inLive==true) {Clive.t.start(); liveFinish = false;} else {Clive.t.stop();}
     		} else System.out.println(".");
     		try{
     		    Thread.sleep(5000);
