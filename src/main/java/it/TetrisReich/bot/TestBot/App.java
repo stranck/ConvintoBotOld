@@ -35,7 +35,7 @@ public class App {
     	//System.out.println(args.length);
     	//Pchat.t.start();
     	if(args.length>=1) log = true; 
-    	String token = "197939074:AAG8AeKyywRv-Z0H5TP4kJgat16DSrGtMIQ";
+    	String token = //token;
     	TelegramBot bot = TelegramBotAdapter.build(token);
     	if(startup()==false) {logger("Fail to loading file"); return;}
     	bot.sendMessage("@MultychatNews", "bot is again online.");
