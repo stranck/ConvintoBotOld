@@ -2,6 +2,9 @@ package it.TetrisReich.bot.TestBot;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.TelegramBotAdapter;
+import com.pengrad.telegrambot.model.Message;
+import com.pengrad.telegrambot.response.SendResponse;
+
 import it.TetrisReich.bot.TestBot.Download;
 import it.TetrisReich.bot.TestBot.Chan;
 
@@ -22,7 +25,7 @@ public class App {
 	//Gson g = new Gson();
 	public static Boolean inLive = false;
 	public static String fileCn;
-	public static Boolean log = true;
+	public static Boolean log = false;
 	public static String Convinti;
 	public static String name;
 	public static Boolean textEsist = true;
@@ -30,12 +33,15 @@ public class App {
 	public static Boolean crash = false;
 	public static String api;
 	public static String videoid;
-	public static Boolean liveFinish = true;
-    public static void main(String[] args) throws IOException {
+	public static byte liveFinish = 0;
+	public static int mesasge_id;
+    public static String threadst1;
+    @SuppressWarnings("deprecation")
+	public static void main(String[] args) throws IOException {
     	//System.out.println(args.length);
     	//Pchat.t.start();
     	if(args.length>=1) log = true; 
-    	String token = //token;
+    	String token = "197939074:AAG8AeKyywRv-Z0H5TP4kJgat16DSrGtMIQ";
     	TelegramBot bot = TelegramBotAdapter.build(token);
     	if(startup()==false) {logger("Fail to loading file"); return;}
     	bot.sendMessage("@MultychatNews", "bot is again online.");
@@ -44,12 +50,16 @@ public class App {
     		String info = getInfo();
     		System.out.println(Convinti + "   " + reader("all"));
     		if(ytupd(info)==true&&!info.equals(reader("all"))){
-    			bot.sendMessage("@MultychatNews", Chan.chan()+"\n" + name + "\n\n" + info);
+    			SendResponse sendResponse = bot.sendMessage("@MultychatNews", Chan.chan()+"\n" + name + "\n\n" + info);
+    			Message message = sendResponse.message();
+    			mesasge_id = message.messageId();
     			writer(Convinti, "all");
     			writer(info, "id");
     			logger("\nyap\n");
     			//The after-live modifier message is still in alpha. I'm waiting for the bot 2.0 update of the library.
-    			if(inLive==true) {Clive.t.start(); liveFinish = false;} else {Clive.t.stop();}
+    			if(inLive==true) {Clive.t.start(); threadst1 = info;liveFinish = 2;} else {
+    				if(liveFinish==1) {Clive.t.stop(); liveFinish = 0;}
+    			}
     		} else System.out.println(".");
     		try{
     		    Thread.sleep(5000);
@@ -119,8 +129,8 @@ public class App {
     }
     public static Boolean startup() throws IOException{
     	logger("Starting up");
-    	if(url()==false&&id()==false&&all()==false&&chat()==false) return false;
-    	id();
+    	if(url()==false&&idd()==false&&all()==false&&chat()==false) return false;
+    	idd();
     	all();
     	chat();
     	File f = new File("text");
@@ -133,7 +143,7 @@ public class App {
     	logger(reader("chat") + "   " + reader("api"));
     	return true;
     }
-    public static Boolean id(){
+    public static Boolean idd(){
     	File f = new File("id");
     	if(f.exists() && !f.isDirectory()) { 
     		writer(getInfo(), "id");
