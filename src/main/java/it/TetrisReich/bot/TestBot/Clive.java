@@ -18,7 +18,7 @@ public class Clive extends Thread{
 		    	obj = arr.getJSONObject(0);
 		    	if(obj.getString("liveBroadcastContent").equals("none")){
 		    		//Finché non aggiornano la libreria del bot di telegram mi devo tenere questo obbrobbio in mezzo al codice
-Download.dwn("https://api.telegram.com/bot197939074:AAG8AeKyywRv-Z0H5TP4kJgat16DSrGtMIQ/editMessageText?chat_id=@Multychatbot&message_id="+App.mesasge_id+"&parse_mode=Markdown&disable_web_page_preview=true&text=*[Live terminata]*\n_"+obj.getJSONObject("localized").getString("title")+"_\n"+App.threadst1);
+Download.dwn("https://api.telegram.com/<token>/editMessageText?chat_id=@Multychatbot&message_id="+App.mesasge_id+"&parse_mode=Markdown&disable_web_page_preview=true&text=*[Live terminata]*\n_"+obj.getJSONObject("localized").getString("title")+"_\n"+App.threadst1);
 		    		App.liveFinish = 1;
 					//change message text in
 		    		/* [LIVE TERMINATA]
