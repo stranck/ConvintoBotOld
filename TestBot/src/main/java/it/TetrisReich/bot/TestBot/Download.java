@@ -40,13 +40,11 @@ public class Download {
             // cazzo voi
         }
     }
-//String api = "https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCj9rv97Ms3Ing1g2QJZ3Scg&maxResults=1&order=date&key=AIzaSyBNNBKNYa3LrC4fjPyEMXRBTv9vp54v4S8";
     String checked = check;
     check = "";
     if(App.link==true){
         App.logger("\n\nCheck:  " + apii);
         App.logger(checked + "\n");
-        //App.logger(check);
     }
     return checked;
 	}
