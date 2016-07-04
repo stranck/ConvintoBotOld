@@ -25,12 +25,8 @@ import java.util.StringTokenizer;
 
 import org.json.*;
 
-/**
- * Hello world!
- *
- */
 public class App {
-	//Gson g = new Gson();
+
 	public static String token;
 	public static Boolean inLive = false;
 	public static String fileCn;
@@ -58,12 +54,7 @@ public class App {
     public static String threadst(){
     	return "https://www.googleapis.com/youtube/v3/videos?part=snippet&id="+videoid+"&maxResults=1&key="+key; 
     }
-    /*public static void threadst3(String txt){
-    	threadst2 = txt;
-    }*/
-    //@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws IOException {
-    	//System.out.println(allLine("Last"));
     		for (String s: args) {
         	if(args.length>=1) log = true; 
         	if(s.equals("-l")) link = true;
@@ -75,17 +66,10 @@ public class App {
         		link = true;
         	}
     	}
-    	//System.out.println(args.length);
-    	//Pchat.t.start();
-
-    	//String token = "197939074:AAG8AeKyywRv-Z0H5TP4kJgat16DSrGtMIQ";
     	if(Startup.startup()==false) {logger("Fail to loading file"); return;}
-    	//System.out.println(token);
     	TelegramBot bot = TelegramBotAdapter.build(token);
     	bot.execute(new SendMessage("@MultychatNews", "*bot is again online.*\n_[version: pre1.0]_")
     			.parseMode(ParseMode.Markdown));
-    	//bot.sendMessage("@MultychatNews", "bot is again online.");
-    	//String id = channel;
     	long nTotalCheck = 0;
     	long nVCheck = 0;
     	long nLCheck = 0;
@@ -103,7 +87,6 @@ public class App {
     		String info = getInfo();
     		logger("Actual id: " + Convinti + "\nId saved: " + reader("all"));
     		if(liveFinish<3){
-    			//System.out.println("min");
     			nVCheck++;
     			loggerL("\nChecking for new video: ");
     			if(ytupd(info)==true&&!info.equals(reader("all"))){
@@ -112,10 +95,7 @@ public class App {
     				String mText = Chan.chan()+"\n[" + name + "](" + info+ ")";
     				SendResponse sendResponse = bot.execute(new SendMessage(channel, mText)
     						.parseMode(ParseMode.Markdown));
-    				//SendResponse sendResponse=bot.sendMessage(channel, Chan.chan()+"\n" + name + "\n\n" + info);
     				Message message = sendResponse.message();
-    				//mesasge_id = message.messageId();
-    				//System.out.print(eLast());	
     				eLast(false);
     				bot.execute(new EditMessageText(channel, lastId, eLast(true))
     						.parseMode(ParseMode.Markdown)
@@ -123,12 +103,8 @@ public class App {
     				writer(mText + ";" + message.messageId(), "Last");
     				writer(Convinti, "all");
     				writer(info, "id");
-    				//logger("\nNew video: true\n");
     				logger("true\n");
-    				//The after-live modifier message is still in alpha.
-    				//I'm waiting for the bot 2.0 update of the library.
     				if(inLive==true) {
-    					//Clive.t.start();
     					logger("Live founded!");
     					threadst1 = threadst();
     					liveFinish = 2;
@@ -139,15 +115,12 @@ public class App {
     					if(Clive.checkUpcoming()){bot.execute(new EditMessageText(channel, mesasge_id,
     							"[Live programmata]\n[" + name + "](" + info+ ")")
     							.parseMode(ParseMode.Markdown));}
-    					
-    				//Clive.checkInLive();
     				}
-    			} else {if(comp==true)/*logger("New video: false");*/logger("false");}
+    			} else {if(comp==true)logger("false");}
     			if(liveFinish==1) {
 					bot.execute(new EditMessageText(channel, mesasge_id, liveEnd)
 							.parseMode(ParseMode.Markdown)
 							.disableWebPagePreview(true));
-					//Clive.t.stop();
 					liveFinish = 0;
 					}
     			if(liveFinish>0) liveFinish = 3;
@@ -159,15 +132,13 @@ public class App {
     				inLive = false;
     				cristoEVenuto = false;
     			}
-    		} else {/*System.out.println("max");*/nLCheck++; Clive.checkInLive();}
+    		} else {nLCheck++; Clive.checkInLive();}
     		try{
     		    Thread.sleep(5000);
     		} catch(InterruptedException ex){
     		    Thread.currentThread().interrupt();
     		}	
     	}
-    	/*JsonObject jsonObject = new JsonParser().parse(Download.dwn()).getAsJsonObject();
-    	System.out.println(jsonObject.get("items").getAsString()); */
     }
     public static Boolean writer(String text, String path){
     	try {
@@ -195,9 +166,9 @@ public class App {
     	Boolean temp = false;
     	fileCn = "";
     	fileCn = reader("id");
-    	if(!id.equals(fileCn)) temp = true;// else {logger("\nNop\n");}
+    	if(!id.equals(fileCn)) temp = true;
     	Convinti = fileCn;
-    	if(comp==true)/*logger("Id change: " + temp);*/logger(" " + temp);
+    	if(comp==true) logger(" " + temp);
     	return temp;
     }
     public static String getInfo(){
@@ -218,7 +189,6 @@ public class App {
     public static String eLast(Boolean ft) throws IOException{
     	StringTokenizer st = new StringTokenizer(allLine("Last"), ";");
     	String ret = st.nextToken();
-    	//System.out.println(ret);
     	if(ft==false){
     		lastId = 0;
     		lastId = Integer.parseInt(st.nextToken());
@@ -235,8 +205,6 @@ public class App {
     	) {
     		int first = 0;
     	    while ((line = br.readLine()) != null) {
-    	    	//if(first==true){first=false; ret = line;}
-    	    	//System.out.println(line);
     	    	if(first<1){first++;}else{ret = ret + line;}
     	    }
     	}
@@ -244,16 +212,12 @@ public class App {
     }
     public static void newFile(String path){
     	File file = new File(path);
-    	//boolean blnCreated = false;
         try{
-          //blnCreated = file.createNewFile();
           file.createNewFile();
         }
         catch(IOException ioe){
         	logger("Error while creating a new empty file :" + ioe);
         }
-        //System.out.println(blnCreated);
-        //return blnCreated;
     }
     public static void logger(String testo){
     	if(log==true) System.out.println(testo);
