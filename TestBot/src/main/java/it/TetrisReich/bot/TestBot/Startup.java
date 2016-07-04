@@ -22,7 +22,6 @@ public class Startup {
 	    		App.logger("File \"text\" not found.");
 	    		App.textEsist = false;
 	    	}
-	    	//logger(reader("chat") + "   " + reader("api"));
 	    	App.logger("TextEsist: " + App.textEsist);
 	    	return true;
 	    }
@@ -54,7 +53,6 @@ public class Startup {
 	    public static Boolean url() throws IOException{
 	    	File f = new File("channelID");
 	    	if(f.exists() && !f.isDirectory()) { 
-	    		//channel = reader("api");
 	    		App.api = "https://www.googleapis.com/youtube/v3/search?part=snippet&channelId="+
 	        		(App.reader("channelID"))+
 	    			"&maxResults=1&order=date&key=" + App.key;
