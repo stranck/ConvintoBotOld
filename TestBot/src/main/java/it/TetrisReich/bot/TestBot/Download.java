@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.ConnectException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import it.TetrisReich.bot.TestBot.App;
@@ -11,7 +12,7 @@ import it.TetrisReich.bot.TestBot.App;
 public class Download {
 	public static String check = null;
 	public static Boolean first = false;
-	public static String dwn(String apii){
+	public static String dwn(String apii) throws ConnectException{
 	URL url;
     InputStream is = null;
     BufferedReader br;
@@ -40,11 +41,13 @@ public class Download {
             // cazzo voi
         }
     }
+//String api = "https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCj9rv97Ms3Ing1g2QJZ3Scg&maxResults=1&order=date&key=AIzaSyBNNBKNYa3LrC4fjPyEMXRBTv9vp54v4S8";
     String checked = check;
     check = "";
-    if(App.link==true){
+    if(App.link==true&&App.secret==false){
         App.logger("\n\nCheck:  " + apii);
         App.logger(checked + "\n");
+        //App.logger(check);
     }
     return checked;
 	}
